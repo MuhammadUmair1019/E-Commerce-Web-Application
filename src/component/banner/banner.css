@@ -1,0 +1,48 @@
+/* https://www.freakyjolly.com/react-slick-carousel-with-custom-navigation-and-lazy-loaded-images-in-slider/#Custom_CSS_Style_for_Slick_Carousel */
+
+/* For arrows */
+.slick-prev:before,
+.slick-next:before {
+    color: #777777;
+    /* color: green; */
+}
+
+/* For arrows on image */
+
+.slides {
+    position: relative;
+}
+
+.slides .slick-next,
+.slides .slick-prev {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    opacity: 0;
+}
+
+.slides .slick-next:hover,
+.slides .slick-prev:hover {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    opacity: 1;
+    height: 2500px;
+
+}
+
+.slick-next:before,
+.slick-prev:before {
+    /* color: #17A272; */
+    color: white;
+    font-size: 50px;
+}
+
+
+.slides .slick-prev {
+    left: 8%;
+}
+
+.slides .slick-next {
+    right: 8%;
+}
