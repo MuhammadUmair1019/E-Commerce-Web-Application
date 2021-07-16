@@ -3,25 +3,26 @@ import {
   TableCell,
   makeStyles,
   ButtonGroup,
+  Typography,
 } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import DeleteIcon from "@material-ui/icons/Delete";
+import { useTheme } from "@material-ui/core";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const useStyles = makeStyles((theme) => ({
   imageStyle: {
-    maxWidth: "100%",
-    height: "auto",
     maxWidth: "100px",
+    height: "auto",
     margin: "auto",
     height: "92px",
-    width: "auto",
     border: "1px solid #ddd",
     padding: "4px",
   },
   quantityStyle: {
     "& .MuiButtonBase-root": {
       border: "1px solid #ddd",
-      borderRadius: "5px",
+      borderRadius: "4px",
     },
   },
   removeIconStyling: {
@@ -38,15 +39,26 @@ const useStyles = makeStyles((theme) => ({
 export default function CartRow(props) {
   const classes = useStyles();
   const { items, updateQuantity, removeFromCart } = props;
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down("sm"));
 
   return items.map((item, i) => (
     <TableRow>
-      <TableCell id={item.id}> {i + 1}</TableCell>
-      <TableCell>
-        <img src={item.image} className={classes.imageStyle} />
+      <TableCell style={{ display: matches ? "none" : false }} id={item.id}>
+        {" "}
+        {i + 1}
       </TableCell>
-      <TableCell>{item.title}</TableCell>
+      <TableCell style={{ display: matches ? "none" : false }}>
+        <img
+          src={item.image}
+          alt="Product image"
+          className={classes.imageStyle}
+        />
+      </TableCell>
       <TableCell>
+        <Typography variant="subtitle2">{item.title}</Typography>
+      </TableCell>
+      <TableCell style={{ display: matches ? "none" : false }}>
         {item.cartQuantity} x Rs {item.price}
       </TableCell>
       <TableCell>
@@ -66,7 +78,7 @@ export default function CartRow(props) {
           </Button>
         </ButtonGroup>
       </TableCell>
-      <TableCell>{item.cartQuantity * item.price}</TableCell>
+      <TableCell> Rs. {item.cartQuantity * item.price}</TableCell>
       <TableCell>
         <Button
           startIcon={<DeleteIcon />}

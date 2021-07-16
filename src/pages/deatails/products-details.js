@@ -9,39 +9,77 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import ProductCarousal from "./product-carousal";
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "0.8rem",
+    },
+  },
   imageStyling: {
     marginLeft: "50px",
   },
   listStyling: {
-    listStyleType: "disclosureClosed",
-    opacity: "0.6",
+    opacity: "0.8",
+    fontSize: theme.spacing(2),
   },
   cardStyling: {
-    padding: "0px 24px",
+    padding: theme.spacing(0, 4),
     borderRadius: "40px",
-    height: "400px",
+    maxWidth: "100%",
+    maxHeight: "400px",
+    width: "300px",
+    textAlign: "center",
+    [theme.breakpoints.down("sm")]: {
+      textAlign: "initial",
+    },
+    [theme.breakpoints.down("xs")]: {
+      textAlign: "center",
+      marginLeft: theme.spacing(2),
+      fontSize: ".6rem",
+    },
   },
   cardHeaderStyle: {
-    paddingBottom: "10px",
-    marginBottom: "30px",
+    paddingBottom: theme.spacing(1),
+    marginBottom: theme.spacing(4),
     borderBottom: "1px solid gray",
     opacity: "0.6",
     textAlign: "center",
   },
-  buttonStyle: {
-    backgroundColor: "#7BBD42",
+  cardQuantity: {
+    marginTop: theme.spacing(2),
+  },
+  btn: {
+    margin: theme.spacing(2, 0),
     borderRadius: "40px",
     padding: "10px 22px",
+    background: "#7BBD42",
     color: "#fff",
     textAlign: "center",
-    margin: "20px 30px",
     textTransform: "initial",
-    "& .MuiButtonBase-root": {},
+    "&:hover": {
+      background: "black",
+    },
+  },
+  buttonStyle: {
+    display: "block",
   },
   buttonGroupStyle: {
-    marginLeft: "10px",
+    marginLeft: theme.spacing(1),
+  },
+  iconStyle: {
+    backgroundColor: "transparent",
+    "& .MuiButtonBase-root": {
+      backgroundColor: "transparent",
+    },
+    "& .MuiButton-label": {
+      "&:hover": {
+        backgroundColor: "transparent",
+
+        background: "transparent",
+      },
+    },
   },
 }));
 
@@ -58,15 +96,11 @@ export default function ProductsDetails(props) {
   return (
     <div style={{ paddingTop: "20px", paddingBottom: "40px" }}>
       <Container>
-        <Grid container>
-          <Grid item lg={5}>
-            <img
-              src={product.image}
-              className={classes.imageStyling}
-              width=" 400px"
-            />
+        <Grid container className={classes.root}>
+          <Grid item xs={12} sm={6} md={4} lg={4}>
+            <ProductCarousal image={product.image} />
           </Grid>
-          <Grid item lg={4}>
+          <Grid item xs={12} sm={6} md={4} lg={5}>
             <Typography variant="p">
               Components, Computers & Components, Desktop Memory, Memory (RAM)
             </Typography>
@@ -77,7 +111,7 @@ export default function ProductsDetails(props) {
               ))}
             </ul>
           </Grid>
-          <Grid item lg={3}>
+          <Grid item xs={12} sm={6} md={4} lg={3}>
             <Card className={classes.cardStyling}>
               <CardContent>
                 <div className={classes.cardHeaderStyle}>
@@ -87,66 +121,51 @@ export default function ProductsDetails(props) {
                   </Typography>
                 </div>
                 <Typography variant="h4">
-                  Rs{product.price * quantity}
+                  Rs. {product.price * quantity}
                 </Typography>
-                <Typography
-                  variant="subtitle1"
-                  style={{ opacity: "0.8", margin: "20px 0px" }}
-                >
-                  Quantity :
-                  <ButtonGroup className={classes.buttonGroupStyle}>
-                    <Button
-                      onClick={() => setQuantity(quantity - 1)}
-                      disabled={quantity === 1}
-                    >
-                      -
-                    </Button>
-                    <Button>{quantity}</Button>
-                    <Button
-                      onClick={() => setQuantity(quantity + 1)}
-                      disabled={quantity === 0}
-                    >
-                      +
-                    </Button>
-                  </ButtonGroup>
-                </Typography>
-                <Button
-                  startIcon={<AddShoppingCartIcon />}
-                  className={classes.buttonStyle}
-                  onClick={handleAddToCart}
-                >
-                  Add to cart
-                </Button>
-                <Button
-                  variant="p"
-                  style={{
-                    fontSize: "12px",
-                    marginLeft: "30px",
-                    textTransform: "initial",
-                    opacity: "0.6",
-                  }}
-                >
-                  <FavoriteBorderIcon
-                    fontSize="small"
-                    style={{ paddingRight: "8px" }}
-                  />
-                  Add to wishlist
-                </Button>
-                <Button
-                  variant="p"
-                  style={{
-                    fontSize: "12px",
-                    marginLeft: "50px",
-                    textTransform: "initial",
-                    opacity: "0.6",
-                  }}
-                >
-                  <FavoriteBorderIcon
-                    fontSize="small"
-                    style={{ paddingRight: "8px" }}
-                  />
-                  Compare
-                </Button>
+                <div className={classes.cardQuantity}>
+                  <Typography variant="subtitle1">
+                    Quantity :{" "}
+                    <ButtonGroup className={classes.buttonGroupStyle}>
+                      <Button
+                        onClick={() => setQuantity(quantity - 1)}
+                        disabled={quantity === 1}
+                      >
+                        -
+                      </Button>
+                      <Button>{quantity}</Button>
+                      <Button
+                        onClick={() => setQuantity(quantity + 1)}
+                        disabled={quantity === 0}
+                      >
+                        +
+                      </Button>
+                    </ButtonGroup>
+                  </Typography>
+                </div>
+                <div className={classes.buttonStyle}>
+                  <Button
+                    startIcon={<AddShoppingCartIcon />}
+                    className={classes.btn}
+                    onClick={handleAddToCart}
+                  >
+                    Add to cart
+                  </Button>
+                  <Button
+                    className={classes.iconStyle}
+                    style={{ backgroundColor: "transparent" }}
+                  >
+                    <FavoriteBorderIcon fontSize="small" />
+                    Add to wishlist
+                  </Button>
+                  <Button
+                    className={classes.iconStyle}
+                    style={{ backgroundColor: "transparent" }}
+                  >
+                    <FavoriteBorderIcon fontSize="small" />
+                    Compare
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           </Grid>

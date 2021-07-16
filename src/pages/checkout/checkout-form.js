@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     },
     "& .MuiInputBase-root": {
       borderRadius: "50px",
-      padding: "0px 200px 0px 10px",
+      padding: "0px 10px 0px 10px",
       height: "45px",
     },
   },
@@ -33,26 +33,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const initailValues = {
-  firstName: "",
-  lastName: "",
-  address: "",
-  phone: "",
-  city: "",
-  email: "",
-};
-
-export default function CheckoutForm() {
-  const [values, setValues] = useState(initailValues);
+export default function CheckoutForm(props) {
+  const { values, handleInputChange } = props;
   const classes = useStyles();
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setValues({
-      ...values,
-      [name]: value,
-    });
-  };
 
   return (
     <>
@@ -108,7 +91,7 @@ export default function CheckoutForm() {
                 fontSize="small"
                 style={{ marginRight: "10px", opacity: "0.6" }}
               />
-              <Typography variant="subtitle2"> Create an account</Typography>
+              <Typography variant="subtitle2">Create an account</Typography>
             </Grid>
           </Grid>
         </Grid>

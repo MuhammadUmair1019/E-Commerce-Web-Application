@@ -3,15 +3,15 @@ import ProductsDetails from "./products-details";
 import { getProductsId } from "../../data/products";
 
 export default function Details() {
-  const { id } = useParams();
-  let history = useHistory();
+	const { id } = useParams();
+	let history = useHistory();
 
-  const product = getProductsId(id);
+	const product = getProductsId(id);
 
-  if (!product) {
-    history.push("/not-found");
-    return null;
-  }
+	if (!product) {
+		history.push("/not-found");
+		return null;
+	}
 
-  return <ProductsDetails product={product} />;
+	return <ProductsDetails product={product} />;
 }

@@ -15,7 +15,7 @@ export default function AppiedFilter(props) {
     onChangeCategory,
     selectedPriceRange,
     onChangePrice,
-    selectedRating,
+    selectedRating, 
     setSelectedRating,
     onClearAll,
   } = props;
@@ -37,7 +37,12 @@ export default function AppiedFilter(props) {
       spacing={1}
       className={classes.allFilter}
     >
-      <Typography variant="subtitle2"> Filterd By : </Typography>
+    <Grid item>
+    <Chip
+      label={"Filter By"}
+      variant="outlined"
+    />
+    </Grid>
       {selectedCategories.length &&
         selectedCategories.map((item) => (
           <Grid item>

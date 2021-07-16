@@ -1,9 +1,33 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useEffect } from "react";
 
 export const CartContext = createContext();
 
+const getLocalCartItems = () => {
+  try {
+    const list = localStorage.getItem("Product Cart");
+    if (list === null) {
+      return [];
+    } else {
+      return JSON.parse(list);
+    }
+  } catch (err) {
+    return [];
+  }
+};
+
 export default function CartProvider(props) {
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState(getLocalCartItems());
+  const [cartTotal, setCartTotal] = useState();
+
+  useEffect(() => {
+    const total = cartItems.reduce(
+      (sum, item) => sum + item.price * item.cartQuantity,
+      0
+    );
+    setCartTotal(total);
+
+    localStorage.setItem("Product Cart", JSON.stringify(cartItems));
+  }, [cartItems]);
 
   // add product to cart
   const addToCart = (item, quantity = 1) => {
@@ -39,12 +63,6 @@ export default function CartProvider(props) {
   const items = cartItems;
   console.log(items);
 
-  //   subtotal
-  const total = cartItems.reduce(
-    (sum, item) => sum + item.price * item.cartQuantity,
-    0
-  );
-
   return (
     <CartContext.Provider
       value={{
@@ -52,7 +70,7 @@ export default function CartProvider(props) {
         addToCart,
         updateQuantity,
         items,
-        total,
+        cartTotal,
         totalCartItems,
         removeFromCart,
       }}

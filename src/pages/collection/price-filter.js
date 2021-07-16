@@ -8,6 +8,11 @@ import Slider from "@material-ui/core/Slider";
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: theme.spacing(1.5),
+    boxShadow: "none",
+    borderBottom: "01px solid #ddd",
+    "& .MuiSlider-root": {
+      color: "#7BBD42",
+    },
   },
 }));
 

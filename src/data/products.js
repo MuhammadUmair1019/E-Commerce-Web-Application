@@ -106,7 +106,7 @@ export const products = [
     status: false,
   },
   {
-    id: 8,
+    id: 9,
     image: "/images/products/RAM-2.png",
     title: "XPG SPECTRIX D60G RGB 8GB DDR4 RGB 3200MHz Desktop Memory ",
     description: [
@@ -119,6 +119,63 @@ export const products = [
     category: "RAM",
     rating: 4,
     status: true,
+  },
+  {
+    id: 10,
+    image: "/images/products/image-6.jpg",
+    title: "Tronsmart Apollo Air TrueWireless™ Stereo Plus Hybrid ANC Earbuds",
+    description: [
+      ["6GB 192-Bit GDDR6"],
+      ["Boost Clock 1750 MHz"],
+      ["1 x HDMI 3 x DisplayPort 1.4"],
+      ["2304 Stream Processors"],
+    ],
+    price: 6000,
+    category: "Graphics Card",
+    rating: 2,
+  },
+  {
+    id: 11,
+    image: "/images/products/image-7.jpg",
+    title: "Razer Huntsman Mini 60% Gaming Keyboard with Razer™ ",
+    description: [
+      ["Razer™ Optical Switches"],
+      ["60% Form Factor"],
+      ["Doubleshot PBT Keycaps With Side-Printed Secondary"],
+      ["Functions"],
+    ],
+    price: 25000,
+    category: "Graphics Card",
+    rating: 4,
+  },
+  {
+    id: 12,
+    image: "/images/products/image-8.jpg",
+    title: "Antec TORQUE Aluminum ATX Mid Tower Computer Case - Black / White",
+    description: [
+      ["896 Cores"],
+      ["Boost: 1725 MHz"],
+      ["4GB 128-bit GDDR5"],
+      ["4K Ready"],
+    ],
+
+    price: 8000,
+    category: "Graphics Card",
+    rating: 4,
+  },
+  {
+    id: 13,
+    image: "/images/products/image-9.jpg",
+    title: "ZOTAC MAGNUS ONE ECM73070C i7 10th Gen with RTX 3070 ",
+    description: [
+      ["10th Gen Intel Core i7 processor"],
+      ["ZOTAC GAMING GeForce RTX 3070 8GB GDDR6"],
+      ["Up to 64GB DDR4-2933/2666 memory support"],
+      ["1 x HDMI 2.1, 3 x DisplayPort 1.4a, 1 x HDMI 1.4 (integrated)"],
+    ],
+    price: 7000,
+    category: "Graphics Card",
+    rating: 3,
   },
 ];
 

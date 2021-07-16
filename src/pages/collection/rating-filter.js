@@ -7,10 +7,12 @@ import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: "10px",
+    marginTop: theme.spacing(1),
+    boxShadow: "none",
+    borderBottom: "01px solid #ddd",
   },
   typography: {
-    padding: "5px",
+    padding: theme.spacing(0.5),
   },
 }));
 

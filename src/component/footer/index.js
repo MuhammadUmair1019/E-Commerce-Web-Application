@@ -1,4 +1,6 @@
+import NewsLetter from "./newsletter";
 import { makeStyles } from "@material-ui/core";
+import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
@@ -13,18 +15,14 @@ const useStyles = makeStyles((theme) => ({
   },
 
   footerStyling: {
-    marginTop: "50px",
-    paddingTop: "60px",
-    paddingLeft: "50px",
+    paddingTop: theme.spacing(9),
+    paddingLeft: theme.spacing(3),
     "& .MuiSvgIcon-root": {
       opacity: "0.6",
     },
     "& .MuiSvgIcon-root:hover": {
       color: "blue",
     },
-  },
-  footerIconStyling: {
-    marginTop: "-6px",
   },
   listStyle: {
     paddingLeft: "0px",
@@ -34,65 +32,83 @@ const useStyles = makeStyles((theme) => ({
       paddingBottom: "5px",
     },
   },
+  socialIcon: {
+    paddingRight: theme.spacing(1),
+  },
   footerBottom: {
     background: "#ddd",
     padding: "10px 0px 10px 50px",
     opacity: "0.6",
     marginBottom: "0px",
+    [theme.breakpoints.down("xs")]: {
+      textAlign: "center",
+    },
   },
 }));
 
 export default function Footer() {
   const classes = useStyles();
   return (
-    <div className={classes.root}>
-      <Container className={classes.footerStyling}>
-        <Grid container spacing={10}>
-          <Grid item lg={5}>
-            <img src="/images/products/logo.png" />
-            <Typography variant="subtitle1"> Contact info</Typography>
-            <Typography variant="p">
-              {" "}
-              4th Floor Naaz Plaza, Building #1, 7 Egerton Rd, Karachi 54000
-            </Typography>
-            <Grid item style={{ marginTop: "16px" }}>
-              <FacebookIcon style={{ paddingRight: "10px" }} fontSize="large" />
-              <InstagramIcon
-                style={{ paddingRight: "10px" }}
-                fontSize="large"
-              />
-              <TwitterIcon style={{ paddingRight: "10px" }} fontSize="large" />
+    <Box>
+      <div className={classes.root}>
+        <NewsLetter />
+        <Container className={classes.footerStyling}>
+          <Grid container>
+            <Grid item xs={12} sm={5} lg={3}>
+              <img src="/images/products/logo.png" alt="Logo" />
+              <Typography variant="subtitle1"> Contact info</Typography>
+              <Typography variant="p">
+                4th Floor Naaz Plaza, Building #1,
+                <br />7 Egerton Rd, Karachi 54000
+              </Typography>
+              <Grid item style={{ marginTop: "16px" }}>
+                <FacebookIcon className={classes.socialIcon} fontSize="large" />
+                <InstagramIcon
+                  className={classes.socialIcon}
+                  fontSize="large"
+                />
+                <TwitterIcon className={classes.socialIcon} fontSize="large" />
+              </Grid>
+            </Grid>
+            <Grid item xs={12} sm={4} lg={3}>
+              <Typography variant="h6"> Information</Typography>
+              <ul className={classes.listStyle}>
+                <li>About Us</li>
+                <li>Contact Us</li>
+                <li>FAQ</li>
+                <li>Return & Exchange</li>
+                <li>Term & Condition</li>
+              </ul>
+            </Grid>
+            <Grid item xs={12} sm={3} lg={3}>
+              <Typography variant="h6"> Categories</Typography>
+              <ul className={classes.listStyle}>
+                <li>Laptops</li>
+                <li>Monitors</li>
+                <li>Graphics Card</li>
+                <li>Mobile Phones</li>
+                <li>Memory (RAM)</li>
+                <li>SSDs</li>
+                <li>Hard Drives (HDD)</li>
+              </ul>
+            </Grid>
+            <Grid item xs={12} sm={4} lg={3}>
+              <Typography variant="h6"> Account</Typography>
+              <ul className={classes.listStyle}>
+                <li>My Acccount</li>
+                <li>Shopping Cart</li>
+                <li>Sign Up</li>
+                <li>Login In</li>
+              </ul>
             </Grid>
           </Grid>
-          <Grid item lg={3}>
-            <Typography variant="h6"> Information</Typography>
-            <ul className={classes.listStyle}>
-              <li>About Us</li>
-              <li>Contact Us</li>
-              <li>FAQ</li>
-              <li>Return & Exchange</li>
-              <li>Term & Condition</li>
-            </ul>
-          </Grid>
-          <Grid item lg={4}>
-            <Typography variant="h6"> Categories</Typography>
-            <ul className={classes.listStyle}>
-              <li>Laptops</li>
-              <li>Monitors</li>
-              <li>Graphics Card</li>
-              <li>Mobile Phones</li>
-              <li>Memory (RAM)</li>
-              <li>SSDs</li>
-              <li>Hard Drives (HDD)</li>
-            </ul>
-          </Grid>
-        </Grid>
-      </Container>
-      <div className={classes.footerBottom}>
-        <Typography variant="subtitle1">
-          CopyRight &copy; 2021 PakDukan. All Right Reversed.
-        </Typography>
+        </Container>
+        <div className={classes.footerBottom}>
+          <Typography variant="subtitle2">
+            CopyRight &copy; 2021 Umair. All Right Reversed.
+          </Typography>
+        </div>
       </div>
-    </div>
+    </Box>
   );
 }

@@ -4,54 +4,97 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import Slider from "react-slick";
+import Box from "@material-ui/core/Box";
+import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 
-import { makeStyles } from "@material-ui/core";
+import { IconButton, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: "20px",
-    width: "290px",
+    marginTop: theme.spacing(2),
+    width: "100%",
+    boxShadow: "none",
+    height: "350px",
+    [theme.breakpoints.down("sm")]: {
+      height: "290px",
+      "& .MuiTypography-root": {
+        fontSize: ".8rem",
+      },
+    },
+    [theme.breakpoints.down("xs")]: {
+      height: "250px",
+      "& .MuiTypography-root": {
+        fontSize: ".7rem",
+      },
+    },
   },
   featuredStyling: {
-    marginTop: theme.spacing(7),
+    marginTop: theme.spacing(3),
   },
   reviewStyling: {
     paddingLeft: "5px",
     opacity: "0.6",
   },
-  buttonStyle: {
-    "& .MuiButton-root": {
-      textTransform: "initial",
-      color: "#7BBD42",
+  image: {
+    maxWidth: "100%",
+    height: "auto",
+    maxWidth: "200px",
+    margin: "auto",
+    height: "200px",
+    width: "auto",
+    padding: "4px",
+    position: "center",
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
+    [theme.breakpoints.down("sm")]: {
+      maxWidth: "100%",
+      height: "auto",
+      maxWidth: "180px",
+      margin: "auto",
+      height: "150px",
+      width: "auto",
+      padding: "4px",
+      position: "center",
+      marginTop: theme.spacing(2),
+    },
+    [theme.breakpoints.down("xs")]: {
+      maxWidth: "100%",
+      height: "auto",
+      maxWidth: "120px",
+      margin: "auto",
+      height: "120px",
+      width: "auto",
+      padding: "4px",
+      position: "center",
+      marginTop: theme.spacing(2),
     },
   },
-  bannerStyle: {
-    widht: "20px",
-    height: "20px",
+  shoppigCartIcon: {
+    color: "white",
+    background: "#7BBD42",
+    padding: ".5rem",
+    width: "30px",
+    height: "30px",
+    borderRadius: "50%",
+    marginRight: ".5rem",
+    marginTop: "-.5rem",
+    [theme.breakpoints.down("xs")]: {
+      display: "none",
+    },
   },
-  root2: {
-    marginTop: "40px",
-    display: "flex",
+  actionArea: {
+    padding: theme.spacing(2, 0),
   },
-  details: {
-    display: "flex",
-    flexDirection: "column",
+  heading: {
+    borderBottom: "2px solid #7bbd42",
+    textAlign: "left",
+    paddingBottom: ".5rem",
+    marginBottom: ".5rem",
   },
-  content: {
-    flex: "1 0 auto",
-    alignContent: "center",
-  },
-  cover: {
-    width: 140,
-  },
+  // responsive classes
 }));
 
 const FeaturedProducts = (props) => {
@@ -60,27 +103,27 @@ const FeaturedProducts = (props) => {
   const classes = useStyles();
   return (
     <Card className={classes.root}>
-      <CardActionArea>
+      <CardActionArea disableRipple>
         <CardContent>
           <Link
             to={`/details/${id}`}
-            style={{ textDecoration: "none", color: "black" }}
+            style={{ textDecoration: "none", color: "blue" }}
           >
             <Typography variant="subtitle2">{title}</Typography>
           </Link>
-          <CardMedia image={image} />
-          <img src={image} />
-          <Typography variant="h6"> Rs25,839,00</Typography>
+          <CardMedia image={image} className={classes.image} />
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            className={classes.actionArea}
+          >
+            <Typography variant="body1"> Rs. 25,839,00</Typography>
+            <IconButton className={classes.shoppigCartIcon}>
+              <AddShoppingCartIcon fontSize="small" />
+            </IconButton>
+          </Box>
         </CardContent>
       </CardActionArea>
-      <CardActions className={classes.buttonStyle}>
-        <Button startIcon={<FavoriteBorderIcon />} fullWidth={true}>
-          Add to fav
-        </Button>
-        <Button startIcon={<ShoppingCartIcon />} fullWidth={true}>
-          Add to cart
-        </Button>
-      </CardActions>
     </Card>
   );
 };
@@ -90,155 +133,13 @@ export default function FeatureListing() {
 
   return (
     <Container className={classes.featuredStyling}>
-      <Typography
-        variant="h5"
-        style={{
-          borderBottom: "2px solid #ddd",
-          textAlign: "center",
-          borderColor: "#7bbd42",
-          paddingBottom: "10px",
-          marginBottom: "10px",
-        }}
-      >
+      <Typography variant="h6" className={classes.heading}>
         Featured Products
       </Typography>
-      <Grid container spacing={1}>
+      <Grid container spacing={1} style={{ width: "100%" }}>
         {products.map((product) => (
-          <Grid item key={product}>
+          <Grid item xs={6} sm={4} md={3} lg={3} key={product}>
             <FeaturedProducts product={product} />
-          </Grid>
-        ))}
-      </Grid>
-    </Container>
-  );
-}
-
-let images = [
-  "/images/brands/brand-1.png",
-  "/images/brands/brand-2.png",
-  "/images/brands/brand-3.png",
-  "/images/brands/brand-4.png",
-  "/images/brands/brand-5.png",
-  "/images/brands/brand-6.png",
-  "/images/brands/brand-7.png",
-  "/images/brands/brand-8.png",
-  "/images/brands/brand-9.png",
-  "/images/brands/brand-10.png",
-  "/images/brands/brand-11.png",
-  "/images/brands/brand-12.png",
-];
-const settings = {
-  arrow: true,
-  infinite: true,
-  slidesToShow: 6,
-  slidesToScroll: 1,
-  autoplay: true,
-  speed: 4000,
-  autoplaySpeed: 3000,
-  className: "center",
-  centerMode: true,
-  centerPadding: "60px",
-};
-
-export function TopBrand() {
-  const classes = useStyles();
-
-  return (
-    <Container className={classes.featuredStyling}>
-      <Typography
-        variant="h5"
-        style={{
-          borderBottom: "2px solid #ddd",
-          textAlign: "left",
-          borderColor: "#7bbd42",
-          paddingBottom: "10px",
-        }}
-      >
-        Top Brands
-      </Typography>
-      <Slider {...settings}>
-        {images.map((image) => (
-          <Grid container>
-            <Grid item style={{ margin: "40px 0px 40px 0px" }}>
-              <img
-                style={{
-                  maxWidth: "150px",
-                  maxHeight: "30px",
-                  justifyItems: "center",
-                }}
-                src={image}
-              />
-            </Grid>
-          </Grid>
-        ))}
-      </Slider>
-    </Container>
-  );
-}
-
-let data = [
-  {
-    images1: "/images/hotcategories/categories-1.jpg",
-    title: "Wireless Headsets",
-  },
-  {
-    images1: "/images/hotcategories/categories-2.jpg",
-    title: "Cases & Covers",
-  },
-  {
-    images1: "/images/hotcategories/categories-3.jpg",
-    title: "Headsets & Accessories",
-  },
-  {
-    images1: "/images/hotcategories/categories-4.jpg",
-    title: "Airpods Pro & Apple",
-  },
-  {
-    images1: "/images/hotcategories/categories-5.jpg",
-    title: "Keyboard & Mice",
-  },
-  {
-    images1: "/images/hotcategories/categories-6.jpg",
-    title: "Computer Cases",
-  },
-];
-
-function HotCategories(props) {
-  const { images1, title } = props.product;
-  const classes = useStyles();
-  return (
-    <div className={classes.root2}>
-      <img className={classes.cover} src={images1} />
-      <div className={classes.details}>
-        <CardContent className={classes.content}>
-          <Typography component="h6" variant="h6">
-            {title}
-          </Typography>
-        </CardContent>
-      </div>
-    </div>
-  );
-}
-
-export function HotCategoriesLisiting() {
-  const classes = useStyles();
-  return (
-    <Container className={classes.featuredStyling}>
-      <Typography
-        variant="h5"
-        style={{
-          borderBottom: "2px solid #ddd",
-          textAlign: "left",
-          borderColor: "#7bbd42",
-          paddingBottom: "10px",
-        }}
-      >
-        Hot Categories
-      </Typography>
-      <Grid container spacing={10}>
-        {data.map((product) => (
-          <Grid item key={product}>
-            <HotCategories product={product} />
           </Grid>
         ))}
       </Grid>

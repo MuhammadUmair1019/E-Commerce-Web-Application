@@ -4,76 +4,114 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Rating } from "@material-ui/lab";
 import { Link } from "react-router-dom";
 import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-import Button from "@material-ui/core/Button";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardContent from "@material-ui/core/CardContent";
+import Box from "@material-ui/core/Box";
+import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import Grid from "@material-ui/core/Grid";
 
-const useStyles = makeStyles({
-  root: {},
+const useStyles = makeStyles((theme) => ({
+  root: {
+    marginTop: theme.spacing(2),
+    width: "100%",
+    boxShadow: "none",
+    height: "380px",
+    "& .MuiTypography-root": {
+      fontSize: ".8rem",
+    },
+    [theme.breakpoints.down("sm")]: {
+      height: "300px",
+      "& .MuiTypography-root": {
+        fontSize: ".8rem",
+      },
+    },
+    [theme.breakpoints.down("xs")]: {
+      height: "280px",
+      "& .MuiTypography-root": {
+        fontSize: ".7rem",
+      },
+    },
+  },
   media: {
-    height: "300px",
-    width: "300px",
-  },
-  listStyle: {
-    paddingLeft: "20px",
-    opacity: "0.6",
-    fontSize: "0.7rem",
-  },
-  buttonStyle: {
-    "& .MuiButton-root": {
-      textTransform: "initial",
-      color: "#7BBD42",
+    maxWidth: "100%",
+    height: "auto",
+    maxWidth: "200px",
+    margin: "auto",
+    height: "200px",
+    width: "auto",
+    padding: "4px",
+    position: "center",
+    margin: theme.spacing(2, 0),
+    [theme.breakpoints.down("sm")]: {
+      maxWidth: "180px",
+      height: "150px",
+    },
+    [theme.breakpoints.down("xs")]: {
+      maxWidth: "120px",
+      height: "120px",
     },
   },
   reviewsStyle: {
     paddingLeft: "5px",
     opacity: "0.6",
   },
-});
+  actionArea: {
+    padding: theme.spacing(2, 0),
+  },
+  shoppigCartIcon: {
+    color: "white",
+    background: "#7BBD42",
+    padding: ".5rem",
+    width: "30px",
+    height: "30px",
+    borderRadius: "50%",
+    marginRight: ".5rem",
+    marginTop: "-.5rem",
+    [theme.breakpoints.down("xs")]: {
+      display: "none",
+    },
+  },
+}));
 
-export default function ProductCard(props) {
-  const { id, image, title, description, price, rating } = props.product;
+export const ProductCard = (props) => {
+  const { id, image, title, price, rating } = props.product;
   const classes = useStyles();
   const Countreviews = reviews.length;
 
   return (
     <Card className={classes.root}>
-      <CardActionArea style={{ height: "550px" }}>
+      <CardActionArea disableRipple>
         <CardContent>
           <Link
             to={`/details/${id}`}
-            style={{ textDecoration: "none", color: "black" }}
+            style={{ textDecoration: "none", color: "blue" }}
           >
             <Typography variant="subtitle2">{title}</Typography>
+            <CardMedia image={image} className={classes.media} />
+            <Grid container>
+              <Rating size="small" name="read-only" value={rating} />
+              <Typography variant="subtitle2" className={classes.reviewsStyle}>
+                ({Countreviews})
+              </Typography>
+            </Grid>
           </Link>
-        </CardContent>
-        <CardMedia className={classes.media} image={image} />
-        <CardContent>
-          <Grid container>
-            <Rating size="small" name="read-only" value={rating} />
-            <Typography variant="subtitle2" className={classes.reviewsStyle}>
-              ({Countreviews})
-            </Typography>
-          </Grid>
-          {description.map((desc) => (
-            <ul className={classes.listStyle}>
-              <li>{desc}</li>
-            </ul>
-          ))}
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            className={classes.actionArea}
+          >
+            <Typography variant="body1"> Rs. {price}</Typography>
+            <IconButton className={classes.shoppigCartIcon}>
+              <AddShoppingCartIcon fontSize="small" />
+            </IconButton>
+          </Box>
         </CardContent>
       </CardActionArea>
-      <CardActions className={classes.buttonStyle}>
-        <Button fullWidth={true}>Rs{price}</Button>
-        <Button startIcon={<ShoppingCartIcon />} fullWidth={true}>
-          Add to cart
-        </Button>
-      </CardActions>
     </Card>
   );
-}
+};
+
+export default ProductCard;

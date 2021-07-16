@@ -1,13 +1,14 @@
 import React, { useState, createContext } from "react";
-import { products as DBProducts } from "../data/products";
+import { products as DBProducts, products } from "../data/products";
 import { priceRange } from "../data/products";
+import Fuse from "fuse.js";
+
 
 export const FilterContext = createContext();
 
 export default function FilterProvider(props) {
   //state declare
   const [selectedCategories, setSelectedCategories] = useState([]);
-  const [selectedCategoriesMenu, setSelectedCategoriesMenu] = useState([]);
   const [selectedPriceRange, setSelectedPriceRange] = useState({
     min: "",
     max: "",
@@ -15,6 +16,7 @@ export default function FilterProvider(props) {
   });
   const [selectedRating, setSelectedRating] = useState();
   const [sortBy, setSortBy] = useState();
+  const [searchString, setSearchString] = useState("");
 
   //chnange categpry
   const onChangeCategory = (category, isChecked) => {
@@ -26,14 +28,7 @@ export default function FilterProvider(props) {
       );
   };
 
-  const onChangeCategoryMenu = (category, isChecked) => {
-    if (isChecked) {
-      setSelectedCategoriesMenu([...selectedCategoriesMenu, category]);
-    } else
-      setSelectedCategoriesMenu(
-        selectedCategoriesMenu.filter((cat) => cat !== category)
-      );
-  };
+
 
   //change price
   const onChangePrice = (newPriceRange) => {
@@ -78,7 +73,6 @@ export default function FilterProvider(props) {
     selectedCategories,
     selectedPriceRange,
     selectedRating,
-    selectedCategoriesMenu
   ) => {
     return data.filter((product) => {
       // Filter Category
@@ -86,6 +80,7 @@ export default function FilterProvider(props) {
       if (selectedCategories.length && product.category)
         categoryMatch = selectedCategories.includes(product.category);
 
+      //Price Filter
       let priceMatch = true;
       const { min, max, isApplied } = selectedPriceRange;
       if (isApplied && product.price)
@@ -95,12 +90,7 @@ export default function FilterProvider(props) {
       let ratingMatch = true;
       if (selectedRating && product.rating)
         ratingMatch = Number(product.rating) >= Number(selectedRating);
-      //sorting Filter
-      let categoryMatchMenu = true;
-      if (selectedCategoriesMenu.length && product.category)
-        categoryMatch = selectedCategoriesMenu.includes(product.category);
-
-      return categoryMatch && priceMatch && ratingMatch && categoryMatchMenu;
+      return categoryMatch && priceMatch && ratingMatch;
     });
   };
 
@@ -118,20 +108,38 @@ export default function FilterProvider(props) {
     });
   };
 
+  const onChangeSearch = (event) => {
+    setSearchString(event.target.value);
+  }
+
+  const getSearchData = (data, searchString) => {
+    const fuse = new Fuse(data, {
+      threshold: 0.6,
+      minMatchCharLength: 2,
+      keys: ["title", "category", "description"],
+    });
+    const results = fuse.search(searchString); 
+    const finalResult = results.map(result => result.item);
+    return finalResult;
+  };
+
+
   const getVisibleProducts = (
     selectedCategories,
     selectedPriceRange,
     selectedRating,
-    sortBy
+    sortBy,
+    searchString,
   ) => {
     let products = DBProducts;
+
+    if(searchString) products = getSearchData(products, searchString)
 
     products = getFilterData(
       products,
       selectedCategories,
       selectedPriceRange,
       selectedRating,
-      selectedCategoriesMenu
     );
     products = getSortData(products, sortBy);
     return products;
@@ -142,15 +150,16 @@ export default function FilterProvider(props) {
       value={{
         ...props,
         selectedCategories,
-        selectedCategoriesMenu,
+        setSelectedCategories,
         selectedPriceRange,
         selectedRating,
+        searchString,
         sortBy,
         setSortBy,
         setSelectedRating,
         onChangeCategory,
-        onChangeCategoryMenu,
         onChangePrice,
+        onChangeSearch,
         onClearAllHandler,
         getVisibleProducts,
       }}

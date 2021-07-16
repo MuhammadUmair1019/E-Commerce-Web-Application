@@ -1,6 +1,63 @@
 export const products = [
   {
     id: 1,
+    image: "/images/products/image-6.jpg",
+    title: "Tronsmart Apollo Air TrueWireless™ Stereo Plus Hybrid ANC Earbuds",
+    description: [
+      ["6GB 192-Bit GDDR6"],
+      ["Boost Clock 1750 MHz"],
+      ["1 x HDMI 3 x DisplayPort 1.4"],
+      ["2304 Stream Processors"],
+    ],
+    price: 6000,
+    category: "Graphics Card",
+    rating: 2,
+  },
+  {
+    id: 2,
+    image: "/images/products/image-7.jpg",
+    title: "Razer Huntsman Mini 60% Gaming Keyboard with Razer™ ",
+    description: [
+      ["Razer™ Optical Switches"],
+      ["60% Form Factor"],
+      ["Doubleshot PBT Keycaps With Side-Printed Secondary"],
+      ["Functions"],
+    ],
+    price: 25000,
+    category: "Graphics Card",
+    rating: 4,
+  },
+  {
+    id: 3,
+    image: "/images/products/image-8.jpg",
+    title: "Antec TORQUE Aluminum ATX Mid Tower Computer Case - Black / White",
+    description: [
+      ["896 Cores"],
+      ["Boost: 1725 MHz"],
+      ["4GB 128-bit GDDR5"],
+      ["4K Ready"],
+    ],
+
+    price: 8000,
+    category: "Graphics Card",
+    rating: 4,
+  },
+  {
+    id: 4,
+    image: "/images/products/image-9.jpg",
+    title: "ZOTAC MAGNUS ONE ECM73070C i7 10th Gen with RTX 3070 ",
+    description: [
+      ["10th Gen Intel Core i7 processor"],
+      ["ZOTAC GAMING GeForce RTX 3070 8GB GDDR6"],
+      ["Up to 64GB DDR4-2933/2666 memory support"],
+      ["1 x HDMI 2.1, 3 x DisplayPort 1.4a, 1 x HDMI 1.4 (integrated)"],
+    ],
+    price: 7000,
+    category: "Graphics Card",
+    rating: 3,
+  },
+  {
+    id: 5,
     image: "/images/products/image-1.png",
     title: "ZOTAC GAMING GeForce GTX 1660 6GB GDDR6 Graphics Card",
     description: [
@@ -14,7 +71,7 @@ export const products = [
     rating: 5,
   },
   {
-    id: 2,
+    id: 6,
     image: "/images/products/image-2.png",
     title: "ZOTAC GAMING GeForce GTX 1650 AMP! Edition 4GB Graphics Card",
     description: [
@@ -29,7 +86,7 @@ export const products = [
     rating: 4,
   },
   {
-    id: 3,
+    id: 7,
     image: "/images/products/image-3.png",
     title: "ZOTAC GAMING GeForce RTX 3070 AMP Holo Graphics Card",
     description: [
@@ -38,22 +95,22 @@ export const products = [
       ["8GB GDDR6 / 14 Gbps / 256-bit"],
       ["Virtual Reality Ready 4K Ready"],
     ],
-    price: 7000,
+    price: 9000,
     category: "Graphics Card",
     rating: 3,
   },
   {
-    id: 4,
+    id: 8,
     image: "/images/products/image-4.png",
     title: "SAPPHIRE PULSE Radeon RX 5600 XT 6GB GDDR6 Graphics Card",
     description: [
-      ["6GB 192-Bit GDDR6"],
-      ["Boost Clock 1750 MHz"],
-      ["1 x HDMI 3 x DisplayPort 1.4"],
-      ["2304 Stream Processors"],
+      ["Industry-leading Qualcomm QCC3046 chip."],
+      ["High-quality Qualcomm® aptX™ audio decoding"],
+      ["Six mics with cVc 8.0 technology for crystal-clear calls"],
+      ["Bluetooth 5.2"],
     ],
     price: 6000,
     category: "Graphics Card",
-    rating: 2,
-  }
-]
+    rating: 5,
+  },
+];

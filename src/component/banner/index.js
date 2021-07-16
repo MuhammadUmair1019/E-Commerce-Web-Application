@@ -19,9 +19,24 @@ let images = [
 
 const useStyles = makeStyles((theme) => ({
   bannerStyle: {
+    maxWidth: "100%",
     width: "100%",
-    height: "400px",
+    maxWidth: "100%",
+    height: "330px",
     marginTop: "2px",
+    [theme.breakpoints.down("md")]: {
+      width: "100%",
+      height: "250px",
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: "100%",
+      height: "200px",
+    },
+    [theme.breakpoints.down("xs")]: {
+      width: "100%",
+      maxWidth: "100%",
+      height: "150px",
+    },
   },
 }));
 
@@ -41,7 +56,7 @@ export default function Banner() {
   return (
     <Slider {...settings} style={{ marginTop: "-30px" }}>
       {images.map((image) => (
-        <img className={classes.bannerStyle} src={image} />
+        <img className={classes.bannerStyle} src={image} alt="Banner Images" />
       ))}
     </Slider>
   );

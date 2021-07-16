@@ -7,6 +7,7 @@ import Collection from "./pages/collection";
 import Details from "./pages/deatails";
 import Cart from "./pages/cart";
 import Checkout from "./pages/checkout";
+import Account from "./pages/account";
 
 const theme = createMuiTheme({
   palette: {
@@ -18,7 +19,7 @@ const theme = createMuiTheme({
 
 function AppRouter() {
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme} style={{ overflow: "hidden" }}>
       <Header />
       <Switch>
         <Route exact path="/">
@@ -35,6 +36,9 @@ function AppRouter() {
         </Route>
         <Route path="/checkout">
           <Checkout />
+        </Route>
+        <Route excat path="/account">
+          <Account />
         </Route>
       </Switch>
       <Footer />
